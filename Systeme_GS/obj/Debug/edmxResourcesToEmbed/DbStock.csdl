@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Gestion_de_Stock_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="dbStockContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Gestion_de_Stock_DBModel.Categorie" />
+    <EntitySet Name="Clients" EntityType="Gestion_de_Stock_DBModel.Client" />
+    <EntitySet Name="Commandes" EntityType="Gestion_de_Stock_DBModel.Commande" />
+    <EntitySet Name="Details_Commande" EntityType="Gestion_de_Stock_DBModel.Details_Commande" />
+    <EntitySet Name="Produits" EntityType="Gestion_de_Stock_DBModel.Produit" />
+    <EntitySet Name="Utilisateurs" EntityType="Gestion_de_Stock_DBModel.Utilisateur" />
+    <AssociationSet Name="FK_Produit_Categorie" Association="Gestion_de_Stock_DBModel.FK_Produit_Categorie">
+      <End Role="Categorie" EntitySet="Categories" />
+      <End Role="Produit" EntitySet="Produits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Commande_Client" Association="Gestion_de_Stock_DBModel.FK_Commande_Client">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Commande" EntitySet="Commandes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Details_Commande_Commande" Association="Gestion_de_Stock_DBModel.FK_Details_Commande_Commande">
+      <End Role="Commande" EntitySet="Commandes" />
+      <End Role="Details_Commande" EntitySet="Details_Commande" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Details_Commande_Produit" Association="Gestion_de_Stock_DBModel.FK_Details_Commande_Produit">
+      <End Role="Produit" EntitySet="Produits" />
+      <End Role="Details_Commande" EntitySet="Details_Commande" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="ID_Categorie" />
+    </Key>
+    <Property Name="ID_Categorie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_Categorie" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Produits" Relationship="Gestion_de_Stock_DBModel.FK_Produit_Categorie" FromRole="Categorie" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID_Client" />
+    </Key>
+    <Property Name="ID_Client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_Client" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Prenom_Client" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Adresse_Client" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Telephone_Client" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Pays_Client" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Ville_Client" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Emai_Client" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Commandes" Relationship="Gestion_de_Stock_DBModel.FK_Commande_Client" FromRole="Client" ToRole="Commande" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="ID_Commande" />
+    </Key>
+    <Property Name="ID_Commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DATE_Commande" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID_Client" Type="Int32" Nullable="false" />
+    <Property Name="Total_HT" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="TVA" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Total_TTC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Client" Relationship="Gestion_de_Stock_DBModel.FK_Commande_Client" FromRole="Commande" ToRole="Client" />
+    <NavigationProperty Name="Details_Commande" Relationship="Gestion_de_Stock_DBModel.FK_Details_Commande_Commande" FromRole="Commande" ToRole="Details_Commande" />
+  </EntityType>
+  <EntityType Name="Details_Commande">
+    <Key>
+      <PropertyRef Name="IdDetail" />
+    </Key>
+    <Property Name="IdDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Commande" Type="Int32" Nullable="false" />
+    <Property Name="ID_Produit" Type="Int32" Nullable="false" />
+    <Property Name="Nom_Produit" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Qantite" Type="Int32" Nullable="false" />
+    <Property Name="Prix" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Remise" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Total" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Commande" Relationship="Gestion_de_Stock_DBModel.FK_Details_Commande_Commande" FromRole="Details_Commande" ToRole="Commande" />
+    <NavigationProperty Name="Produit" Relationship="Gestion_de_Stock_DBModel.FK_Details_Commande_Produit" FromRole="Details_Commande" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="ID_Produit" />
+    </Key>
+    <Property Name="ID_Produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom_Produit" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Quantite_Produit" Type="Int32" Nullable="false" />
+    <Property Name="Prix_Produit" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Image_Produit" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ID_Categorie" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Categorie" Relationship="Gestion_de_Stock_DBModel.FK_Produit_Categorie" FromRole="Produit" ToRole="Categorie" />
+    <NavigationProperty Name="Details_Commande" Relationship="Gestion_de_Stock_DBModel.FK_Details_Commande_Produit" FromRole="Produit" ToRole="Details_Commande" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="Nom_Utilisateur" />
+    </Key>
+    <Property Name="Nom_Utilisateur" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Mot_De_Passe" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Produit_Categorie">
+    <End Type="Gestion_de_Stock_DBModel.Categorie" Role="Categorie" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Gestion_de_Stock_DBModel.Produit" Role="Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="ID_Categorie" />
+      </Principal>
+      <Dependent Role="Produit">
+        <PropertyRef Name="ID_Categorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Commande_Client">
+    <End Type="Gestion_de_Stock_DBModel.Client" Role="Client" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Gestion_de_Stock_DBModel.Commande" Role="Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID_Client" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="ID_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Details_Commande_Commande">
+    <End Type="Gestion_de_Stock_DBModel.Commande" Role="Commande" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Gestion_de_Stock_DBModel.Details_Commande" Role="Details_Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="ID_Commande" />
+      </Principal>
+      <Dependent Role="Details_Commande">
+        <PropertyRef Name="ID_Commande" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Details_Commande_Produit">
+    <End Type="Gestion_de_Stock_DBModel.Produit" Role="Produit" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Gestion_de_Stock_DBModel.Details_Commande" Role="Details_Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="ID_Produit" />
+      </Principal>
+      <Dependent Role="Details_Commande">
+        <PropertyRef Name="ID_Produit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
