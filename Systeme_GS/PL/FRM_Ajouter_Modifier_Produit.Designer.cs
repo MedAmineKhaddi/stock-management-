@@ -258,6 +258,7 @@ namespace Systeme_GS.PL
             this.combocategorie.Name = "combocategorie";
             this.combocategorie.Size = new System.Drawing.Size(220, 21);
             this.combocategorie.TabIndex = 39;
+            this.combocategorie.SelectedIndexChanged += new System.EventHandler(this.combocategorie_SelectedIndexChanged);
             // 
             // button1
             // 

@@ -108,3 +108,4 @@ C:\Users\USER\Desktop\Systeme_GS\Systeme_GS\obj\Debug\Systeme_GS.PL.USER_Liste_C
 C:\Users\USER\Desktop\Systeme_GS\Systeme_GS\obj\Debug\Systeme_GS.PL.FRM_Detail_Commande.resources
 C:\Users\USER\Desktop\Systeme_GS\Systeme_GS\obj\Debug\Systeme_GS.PL.Frm_Client_Commande.resources
 C:\Users\USER\Desktop\Systeme_GS\Systeme_GS\obj\Debug\Systeme_GS.PL.FRM_Produit_Commande.resources
+C:\Users\USER\Desktop\Systeme_GS\Systeme_GS\obj\Debug\Systeme_GS.PL.FRM_Ajouter_Stock.resources

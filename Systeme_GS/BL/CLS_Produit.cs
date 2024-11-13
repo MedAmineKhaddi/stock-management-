@@ -60,6 +60,19 @@ namespace Systeme_GS.BL
                 db.SaveChanges();
             }
         }
+        
+        public void Modifier_quantité(int id, int quantite)
+        {
+            PR = new Produit();
+            PR = db.Produits.SingleOrDefault(s => s.ID_Produit == id);
+
+            if (PR != null)
+            {
+                PR.Quantite_Produit -= quantite;
+                db.SaveChanges();
+            }
+
+        }
 
 
 

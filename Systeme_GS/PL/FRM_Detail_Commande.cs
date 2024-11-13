@@ -13,6 +13,7 @@ namespace Systeme_GS.PL
     public partial class FRM_Detail_Commande : Form
     {
         private UserControl userCommande;
+        private UserControl userProduit;
         private dbStockContext db;
         public FRM_Detail_Commande(UserControl user)
         {
@@ -223,6 +224,7 @@ namespace Systeme_GS.PL
         public int IDCLIENT;
         private void btnEnregistrer_Click(object sender, EventArgs e)
         {
+            BL.CLS_Produit cls_pr = new BL.CLS_Produit();
             BL.CLS_Commande_DetailCommande clscommande = new BL.CLS_Commande_DetailCommande();
             if (dvgdetailCommande.Rows.Count == 0) //Si datagridView est Vide
             {
@@ -243,9 +245,18 @@ namespace Systeme_GS.PL
                     //Enregistrer liste Details_Commande dans base de donnée
                     foreach(var LD in BL.D_Commande.listeDetail)
                     {
+                        // Modifier la table produit 
+                        Produit PR = new Produit();
+                        
                         clscommande.Ajouter_Detail(LD.Id, LD.Nom, LD.Quantite, LD.Prix, LD.Remise, LD.Total);
+                        cls_pr.Modifier_quantité(LD.Id, LD.Quantite);
+                        db.SaveChangesAsync();
+                       
                     }
                     (userCommande as USER_Liste_Commande).Remplirdata();
+                
+
+
                     //vider liste
                     BL.D_Commande.listeDetail.Clear();
                     //quitter formulaire

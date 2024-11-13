@@ -1,0 +1,41 @@
+# Ignorer les fichiers de configuration contenant des informations sensibles
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+web.config
+
+# Ignorer les répertoires bin et obj générés par .NET
+bin/
+obj/
+
+# Ignorer les fichiers de configuration d'IDE
+.vs/
+.vscode/
+
+# Ignorer les fichiers temporaires
+*~
+
+# Ignorer les fichiers DLL
+*.dll
+
+# Exclure les fichiers de base de données
+*.mdf
+*.ldf
+*.bak
+*.db
+*.sqlite
+
+# Ignorer les fichiers de log
+*.log
+
+# Ignorer les fichiers de sauvegarde et de cache
+*.bak
+*.swp
+*.tmp
+
+# Ignorer les fichiers de projet générés
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates

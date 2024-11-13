@@ -233,5 +233,10 @@ namespace Systeme_GS.PL
                 }
             }
         }
+
+        private void combocategorie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
