@@ -2,8 +2,8 @@ Stock Management System - README
 ## Project Overview
 
 This **Stock Management System** is a desktop application designed to streamline the management of inventory, clients, and orders for **NewFlex**, a foam company. The system is developed using **C#**, **Windows Forms**, and **SQL Server**. It automates various stock management tasks, providing easy access to essential data such as products, categories, clients, and orders.
+![Home Page Screenshot](image/homepage-screenshot.png)
 
-image/homepage-screenshot.png
 ## Features
 
 - **User Authentication**: Secure login system for administrators to manage access to the application.
